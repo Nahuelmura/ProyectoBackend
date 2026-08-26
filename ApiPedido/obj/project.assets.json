@@ -8018,11 +8018,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoPedido\\ApiPedido\\ApiPedido.csproj",
+      "projectUniqueName": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoBackend\\ApiPedido\\ApiPedido.csproj",
       "projectName": "ApiPedido",
-      "projectPath": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoPedido\\ApiPedido\\ApiPedido.csproj",
+      "projectPath": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoBackend\\ApiPedido\\ApiPedido.csproj",
       "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoPedido\\ApiPedido\\obj\\",
+      "outputPath": "C:\\Users\\crist\\OneDrive\\Escritorio\\ProyectoBackend\\ApiPedido\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config"
