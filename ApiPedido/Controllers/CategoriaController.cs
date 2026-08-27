@@ -1,12 +1,10 @@
-
 using ApiPedido.Data;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiPedidos.Controllers
 {
-    [Microsoft.AspNetCore.Components.Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoriaController : ControllerBase
     {
@@ -17,24 +15,14 @@ namespace ApiPedidos.Controllers
             _context = context;
         }
 
-       
-    
-
-//     [HttpGet]
-//  public async Task<IActionResult> ListadoCategoria()
-
-//         {
-//             var listaCategoria = await _context.Categorias.ToListAsync();
-//             return Ok (listaCategoria);
-            
-//         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> ListadoCategoria()
+        {
+            var categorias = await _context.Categorias.ToListAsync();
 
-// }
-
-
-}
-
-
+            return Ok(categorias);
+        }
+    }
 }
