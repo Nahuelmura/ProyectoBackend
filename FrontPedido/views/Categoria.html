@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/FrontPedido/style/style.css">
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-4 shadow-sm p-4 bg-white rounded">
@@ -19,13 +19,39 @@
                 placeholder="Ingrese el nombre de la nueva categoría...">
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary w-100" id="btnGuardar" onclick="crearCategoria()">
+            <button class="btn btn-primary w-100" id="btnGuardar" onclick="AgregarCategoria()">
                 Guardar
             </button>
         </div>
     </div>
 
-  
+
+    <!-- Modal editar -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="hidden" id="idEditar">
+                    <input type="text" id="nombreEditar" placeholder="Ingrese nuevo Nombre">
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="EditarCategoria()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <table class="table table-bordered table-hover">
         <thead class="table-light">
             <tr>
@@ -33,13 +59,13 @@
             </tr>
         </thead>
         <tbody id="TablaCategoria">
-          
+
         </tbody>
     </table>
 
 </div>
 
-<script src="../FrontPedido/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/Categoria.1.0.0.js"></script>
 </body>
 </html>

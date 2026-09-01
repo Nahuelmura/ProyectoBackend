@@ -1,7 +1,28 @@
 using ApiPedido.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+
+{
+
+    options.AddPolicy("AllowAll", policy =>
+
+    {
+
+        policy.AllowAnyOrigin()
+
+              .AllowAnyMethod()
+
+              .AllowAnyHeader();
+
+    });
+
+});
+
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
@@ -25,10 +46,17 @@ var app = builder.Build();
     app.UseSwaggerUI();
 
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "../FrontPedido")),
+    RequestPath = ""
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();
