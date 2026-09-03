@@ -26,3 +26,24 @@ public class Producto
 
 
 }
+
+public class VistaProducto
+{
+    public int ProductoID { get; set; }
+
+    public string? NombreProducto { get; set; }
+    public string? DescripcionProducto { get; set; }
+
+    public decimal PrecioCostoProducto { get; set; }
+
+    public decimal PrecioVentaProducto { get; set; }
+
+    public int StockProducto { get; set; }
+
+
+
+    public int CategoriaID { get; set; }
+
+    public string? NombreCategoria { get; set; }
+
+}
