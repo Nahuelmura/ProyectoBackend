@@ -48,6 +48,7 @@ function mostrarCategoria(data) {
 
 
 
+
 function AgregarCategoria() {
   var nuevaCategoria = {
     nombre: document.getElementById("nombreCategoria").value,
@@ -101,7 +102,7 @@ function EditarCategoria() {
   let id = document.getElementById("idEditar").value;
 
   let editarCategoria = {
-    categoriaId: document.getElementById("idEditar").value,
+    categoriaId: parseInt(id),
     nombre: document.getElementById("nombreEditar").value,
   };
 
