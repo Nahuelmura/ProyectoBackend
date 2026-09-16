@@ -23,3 +23,13 @@ public enum Estado
 
     Entregado
 }
+
+public class VistaPedido
+{
+    public int PedidoID { get; set; }
+    public string? NombreDelCliente { get; set; }
+    public string EstadoPedido { get; set; }
+
+    public string FechaFormateada { get; set; }
+
+}

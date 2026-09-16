@@ -10,13 +10,76 @@
 <body>
     <div class="container ">
     
-        <h1 class="mb-4">Producto</h1>
-    
-        <div class=" ">
-            <div class="d-flex gap-2 mb-3">
-                <select id="CategoriaID" name="CategoriaID" class="form-control">
-                    <option value="">[SELECCIONE...]</option>
-                </select>
+            <h1 class="mb-4">Producto</h1>
+            
+            <div class=" row">
+                <div class="d-flex gap-2 mb-3">
+                    <select id="CategoriaID" name="CategoriaID" class="form-control">
+                        <option value="">[SELECCIONE...]</option>
+                    </select>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                    <input type="number" class="form-control" id="precioCosto" placeholder="PrecioCosto">
+                    <input type="number" class="form-control" id="precioVenta" placeholder="PrecioVenta">
+                    <input type="number" class="form-control" id="stock" placeholder="Stock">
+            
+                    <button type="button" class="btn btn-success" onclick="AgregarProducto()">
+                        Crear Producto
+                    </button>
+            
+                </div>
+            
+            
+            
+            
+                <div class="modal" id="editarProducto" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edicion Producto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="idEditar">
+                                <label for="categoriaeditar">Categoría:</label>
+                                <select id="CategoriaIDeditar" name="CategoriaID" class="form-control">
+                                    <option value="">[SELECCIONE...]</option>
+                                </select>
+                                <label for="nombreeditar">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreEditar" placeholder="Nombre">
+                                <label for="precioeditar">Precio Costo:</label>
+                                <input type="number" class="form-control" id="precioCostoeditar" placeholder="Precio Costo">
+                                <label for="precioeditar">Precio Venta:</label>
+                                <input type="number" class="form-control" id="precioVentaeditar" placeholder="Precio Venta">
+                                <label for="stockeditar">Stock:</label>
+                                <input type="number" class="form-control" id="stockeditar" placeholder="Stock">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="EditarProducto()">Guardar
+                                    Cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <table class="table table-striped table-hover text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Categoría</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProductos">
+            
+            
+                    </tbody>
+                </table>
+            </div>
+            
+            </div>
                 
             </div>
 
