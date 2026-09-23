@@ -18,11 +18,11 @@ namespace ApiPedidos.Controllers
 
 
 
-        
+
 
         [HttpGet]
-        
-public async Task <IActionResult> ListadoPedido ()
+
+        public async Task<IActionResult> ListadoPedido()
         {
             var pedidos = await _context.Pedidios.Select(p => new VistaPedido
             {
@@ -35,10 +35,67 @@ public async Task <IActionResult> ListadoPedido ()
             }).ToListAsync();
             return Ok(pedidos);
         }
-        }
-        
 
-        }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> CrearPedidoConDetalles([FromBody] Pedido pedido)
+        {
+
+            try
+            {
+                var nuevoPedido = new Pedido
+                {
+                    Nombre = pedido.Nombre,
+                    Fecha = pedido.Fecha,
+                    Estado = pedido.Estado,
+                    DetallePedidos = pedido.DetallePedidos.Select(d => new DetallePedido
+                    {
+                        ProductoID = d.ProductoID,
+                        Cantidad = d.Cantidad,
+                        PrecioUnitario = d.PrecioUnitario
+                    }).ToList()
+                };
+
+                await _context.Pedidios.AddAsync(nuevoPedido);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(CrearPedidoConDetalles), new { id = nuevoPedido.PedidoID }, new
+                {
+                    mensaje = "Pedido creado exitosamente",
+                    pedidoID = nuevoPedido.PedidoID
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { error = "Error al guardar: " + ex.Message }) { StatusCode = 500 };
+            }
+        }
 
     
+
+
+
+
+
+
+
+      [HttpGet("productos")]
+        public IActionResult ObtenerProductos()
+        {
+           
+                var productos = _context.Productos.ToList();
+                return Ok(productos); 
+        
+          
+        }
+
+
+
+
+}
+
+
+}

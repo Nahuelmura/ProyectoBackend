@@ -33,3 +33,6 @@ public class VistaPedido
     public string FechaFormateada { get; set; }
 
 }
+
+
+
