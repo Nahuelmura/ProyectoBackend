@@ -2,6 +2,31 @@
 let detallesPedido = []; // donde guardamos los detalles del pedido
 
 
+function ObtenerPedido() {
+  fetch("http://localhost:5049/api/Pedido")
+    .then((respuesta) => respuesta.json())
+    .then((data) => {
+      console.log(data);
+      mostrarPedido(data);
+    })
+    .catch((error) => console.error(error));
+}
+
+function mostrarPedido(data) {
+  const tbody = document.getElementById("TablaPedido");
+  tbody.innerHTML = "";
+
+  data.forEach((element) => {
+    console.log("Elemento:", element);
+    console.log("ID:", element.pedidoID);
+    let tr = tbody.insertRow();
+    tr.insertCell(0).innerHTML = element.nombreDelCliente;
+    tr.insertCell(1).innerHTML = element.fechaFormateada;
+    tr.insertCell(2).innerHTML = element.estadoPedido;
+   
+  });
+}
+
 // funcion donde obtenemos los productos
 function obtenerProductos() {
   fetch("http://localhost:5049/api/Producto")
@@ -89,7 +114,10 @@ function MostrarDetalles() {
       </tr>
     `;
   });
-
+let inputTotal = document.getElementById("total");
+if (inputTotal) {
+  inputTotal.value = totalAcumulado.toFixed(2);
+}
 
 }
 function EliminarDetalle(index) {
@@ -101,4 +129,50 @@ function EliminarDetalle(index) {
 
 
 
+
+function CrearPedido() {
+  let pedido = {
+    nombre: document.getElementById("nombre").value,
+    fecha: document.getElementById("fecha").value,
+    estado: Number(document.getElementById("estado").value),
+    total: Number(document.getElementById("total").value),
+
+    detallePedidos: detallesPedido,
+  };
+
+  console.log("ENVIANDO PEDIDO:", pedido);
+
+  fetch("http://localhost:5049/api/Pedido", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pedido),
+  })
+    .then((respuesta) => respuesta.json())
+    .then((data) => {
+      console.log("Pedido creado:", data);
+      alert("Pedido creado correctamente");
+
+      // iimpiamos el formulario
+      detallesPedido = [];
+      document.getElementById("fecha").value = "";
+      document.getElementById("total").value = "";
+        document.getElementById("nombre").value = "";
+
+      MostrarDetalles();
+      obtenerProductos();
+      ObtenerPedido();
+    })
+    .catch((error) => {
+      console.error("Error al crear pedido:", error);
+      alert("Error al conectar con el servidor.");
+    });
+}
+
+
+
+
+ObtenerPedido();
 obtenerProductos()
