@@ -48,18 +48,16 @@ public async Task<IActionResult> ListadoProducto()
 
         public async Task<IActionResult> CrearProducto([FromBody] Producto producto)
         {
+            if (string.IsNullOrWhiteSpace(producto.Nombre))
+            {
+                return BadRequest("El nombre está vacío");
+            }
 
-            
             var existeCategoria = await _context.Categorias.AnyAsync(c => c.CategoriaID == producto.CategoriaID);
 
             if (!existeCategoria)
             {
                 return BadRequest($"Error: La categoría con ID {producto.CategoriaID} no existe.");
-            }
-
-            if (producto.Nombre == "" )
-            {
-                return BadRequest("El producto esta vacio");
             }
 
         

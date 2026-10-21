@@ -127,9 +127,6 @@ function EliminarDetalle(index) {
 
 
 
-
-
-
 function CrearPedido() {
   let pedido = {
     nombre: document.getElementById("nombre").value,
@@ -159,7 +156,7 @@ function CrearPedido() {
       detallesPedido = [];
       document.getElementById("fecha").value = "";
       document.getElementById("total").value = "";
-        document.getElementById("nombre").value = "";
+       document.getElementById("nombre").value = "";
 
       MostrarDetalles();
       obtenerProductos();

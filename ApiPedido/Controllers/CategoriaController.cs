@@ -35,13 +35,24 @@ namespace ApiPedidos.Controllers
 
             var existeCategoria = await _context.Categorias.AnyAsync(e => e.Nombre == nombreMayuscula);
 
+            if (string.IsNullOrWhiteSpace(categoria.Nombre))
+            {
+                return BadRequest("El nombre está vacío");
+            } 
+
+            if (existeCategoria)
+            {
+                //  Conflict que hubo un problema porque ya existe 409
+                return Conflict("La categoría ya existe"); // 
+            }
+
             if (!existeCategoria)
             {
                 var nuevaCategoria = new Categoria
                 {
                     Nombre = nombreMayuscula,
                 };
-                             _context.Add(nuevaCategoria);
+                _context.Add(nuevaCategoria);
                 await _context.SaveChangesAsync();
                 return Ok("Categoria guardada");
             }
@@ -53,33 +64,34 @@ namespace ApiPedidos.Controllers
 
 
 
-    
+
 
         [HttpPut("{categoriaID}")]
-        public async Task<IActionResult> EditarCategoria( int categoriaID, [FromBody] Categoria categoria)
+        public async Task<IActionResult> EditarCategoria(int categoriaID, [FromBody] Categoria categoria)
         {
             var nombreMayuscula = categoria.Nombre?.Trim().ToUpper(); // guardamos el nombre en mayuscula
 
-                var editarCategoria = await _context.Categorias.Where(e => e.CategoriaID == categoriaID).SingleOrDefaultAsync(); 
-                // le decimos que busque en el contexto de categorias un id que coincida con el parametro que le esto pasando
+            var editarCategoria = await _context.Categorias.Where(e => e.CategoriaID == categoriaID).SingleOrDefaultAsync();
+            // le decimos que busque en el contexto de categorias un id que coincida con el parametro que le esto pasando
 
             if (editarCategoria == null)
             {
-                return Ok ("la categoria que quiere editar no existe");
-            };
+                return NotFound("la categoria que quiere editar no existe");
+            }
+            ;
 
-            var existeNombre = await _context.Categorias.AnyAsync(e => e.Nombre == nombreMayuscula && e.CategoriaID != categoriaID); 
-            
+            var existeNombre = await _context.Categorias.AnyAsync(e => e.Nombre == nombreMayuscula && e.CategoriaID != categoriaID);
+
             // si Nombre es igual a la variable NombreMayuscula y  que sea distintp al id guardado
-            if(!existeNombre)
+            if (!existeNombre)
             {
                 editarCategoria.Nombre = nombreMayuscula;
-               await  _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-                return Ok ("categoria editada exitosamente");
+                return Ok("categoria editada exitosamente");
             }
 
-            return Ok ("Ya existe otra categoria con ese nombre");
+            return BadRequest("Ya existe otra categoria con ese nombre");
         }
 
 
@@ -90,7 +102,7 @@ namespace ApiPedidos.Controllers
         [HttpDelete("{categoriaId}")]
         public async Task<IActionResult> Eliminar(int categoriaId)
         {
-            var categoria = await _context.Categorias.FindAsync(categoriaId); 
+            var categoria = await _context.Categorias.FindAsync(categoriaId);
             // pedimos que busque  la categoría directamente por su Id
             if (categoria == null)
             {
@@ -100,10 +112,10 @@ namespace ApiPedidos.Controllers
             _context.Categorias.Remove(categoria);
             await _context.SaveChangesAsync();
             return NoContent();
-        
-        
-   
-            
+
+
+
+
         }
 
         [HttpGet("{categoriaId}")]
@@ -120,11 +132,11 @@ namespace ApiPedidos.Controllers
         }
 
     }
-        
 
-        }
-        
 
-        
+}
+
+
+
 
 
