@@ -12,9 +12,17 @@ public class Pedido
 
     public DateTime Fecha { get; set; }
 
+    public decimal Total { get; set; }
+
+
+
     public ICollection<DetallePedido>? DetallePedidos { get; set; }
 
+
+
 }
+
+
 
 public enum Estado
 {

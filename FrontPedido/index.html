@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos - Inicio</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-4">
+
+        <div class="p-5 mb-4 bg-white rounded-3 shadow-sm border text-center">
+            <h1 class="display-5 fw-bold text-primary">Panel de Gestión de Pedidos</h1>
+            <p class="lead text-muted col-md-8 mx-auto mt-3">
+                Bienvenido al sistema. Desde aquí puedes administrar todo el catálogo de productos, clasificar
+                categorías y gestionar los pedidos de los clientes.
+            </p>
+        </div>
+
+
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">📦</div>
+                        <h4 class="card-title fw-bold">Productos</h4>
+                        <p class="card-text text-muted">
+                            Administra productos, asigna categorías, controla precios de costo/venta y el stock
+                            disponible.
+                        </p>
+                    <div class="mt-3 mb-2">
+                        <span class="text-muted">Total de productos registrados</span>
+                        <h2 id="totalProductos">Cargando...</h2>
+                    </div>
+                        <a href="views/Producto.html" class="btn btn-primary w-100 mt-3">
+                            Ir a Productos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3"></div>
+                        <h4 class="card-title fw-bold">Categorías</h4>
+                        <p class="card-text text-muted">
+                            Organiza y clasifica tus artículos creando nuevas categorías para tu catálogo.
+                        </p>
+                        <a href="views/Categoria.html" class="btn btn-outline-primary w-100 mt-3">
+                            Ir a Categorías
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🛒</div>
+                        <h4 class="card-title fw-bold">Pedidos</h4>
+                        <p class="card-text text-muted">
+                            Registra nuevos pedidos por cliente, calcula subtotales y consulta el historial guardado.
+                        </p>
+                        <a href="views/Pedido.html" class="btn btn-success w-100 mt-3">
+                            Ir a Pedidos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+   
+    <script src="js/layout.js"></script>
+
+    <script src="js/Producto.1.0.0.js"></script>
+    
+</body>
+
+</html>

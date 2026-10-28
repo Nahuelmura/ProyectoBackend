@@ -18,6 +18,7 @@ namespace ApiPedidos.Controllers
 
         
         
+   
 
 [HttpGet]
 public async Task<IActionResult> ListadoProducto()
@@ -38,7 +39,19 @@ public async Task<IActionResult> ListadoProducto()
 
 
             }).ToList();
-            return Ok(ProductoMostrar);
+
+
+
+            var resultado = new
+            {
+        
+                TotalProductos = ProductoMostrar.Count,
+                Productos = ProductoMostrar,
+                TotalStock = ProductoMostrar.Sum(p => p.StockProducto),
+                CapitalInvertido = ProductoMostrar.Sum(p => p.StockProducto * p.PrecioCostoProducto)
+            };
+
+            return Ok(resultado);
 
         }
     
@@ -89,7 +102,7 @@ public async Task<IActionResult> ListadoProducto()
         {
             if (producto.Nombre == null)
             {
-                return NotFound("El nombre esta vacio");
+                return BadRequest("El nombre esta vacio");
             }
 
             
@@ -115,7 +128,7 @@ public async Task<IActionResult> ListadoProducto()
 
                 return Ok("Producto Editado exitosamente");
             }
-            return NotFound("Ya existe otro producto con ese nombre");
+            return BadRequest("Ya existe otro producto con ese nombre");
         }
 
 

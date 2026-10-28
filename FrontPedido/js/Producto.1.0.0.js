@@ -10,11 +10,15 @@ function obtenerProducto() {
 }
 
 function mostrarProductos(data) {
+  document.getElementById("totalProductos").textContent = data.totalProductos;
+  document.getElementById("totalStock").textContent = data.totalStock;
+    document.getElementById("totalCapital").textContent = data.capitalInvertido;
+
   const tbody = document.getElementById("tablaProductos");
   if (!tbody) return;
   tbody.innerHTML = "";
 
-  data.forEach((element) => {
+  data.productos.forEach((element) => {
     console.log(data);
     let tr = tbody.insertRow();
     tr.insertCell(0).innerHTML = element.nombreProducto;
@@ -137,12 +141,14 @@ function EditarProducto() {
   console.log("ID recibido editar:", id);
 
   let editarProducto = {
-    productoId: id,
-    categoriaID: document.getElementById("CategoriaIDeditar").value,
+   
+    productoID: id, 
+    categoriaID: parseInt(document.getElementById("CategoriaIDeditar").value), 
     nombre: document.getElementById("nombreEditar").value,
-    precioCosto: parseFloat(document.getElementById("precioCostoeditar").value),
-    precioVenta: parseFloat(document.getElementById("precioVentaeditar").value),
-    stock: document.getElementById("stockeditar").value,
+   
+    precioCosto: parseFloat(document.getElementById("precioCostoeditar").value) ,
+    precioVenta:parseFloat(document.getElementById("precioVentaeditar").value) ,
+    stock: parseInt(document.getElementById("stockeditar").value) , 
   };
 
   fetch(`http://localhost:5049/api/Producto/${id}`, {
@@ -186,6 +192,17 @@ function Eliminar(id) {
     })
     .catch((error) => console.error("No se pudo acceder a la api.", error));
 }
+
+
+// fetch("http://localhost:5049/api/Producto/totalProductos")
+//   .then((respuesta) => respuesta.json())
+//   .then((data) => {
+//     console.log(data);
+
+//     document.getElementById("totalProductos").textContent = data;
+//   })
+//   .catch((error) => console.log(error));
+
 
 obtenerProducto();
 obtenerCategorias();
