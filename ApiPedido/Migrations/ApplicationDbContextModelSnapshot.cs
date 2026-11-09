@@ -38,6 +38,34 @@ namespace ApiPedido.Migrations
                     b.ToTable("Categorias");
                 });
 
+            modelBuilder.Entity("ApiPedido.Models.Cliente", b =>
+                {
+                    b.Property<int>("ClienteID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteID"));
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClienteID");
+
+                    b.ToTable("Clientes");
+                });
+
             modelBuilder.Entity("ApiPedido.Models.DetallePedido", b =>
                 {
                     b.Property<int>("DetallePedidoId")
@@ -75,6 +103,9 @@ namespace ApiPedido.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PedidoID"));
 
+                    b.Property<int?>("ClienteID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
@@ -84,7 +115,12 @@ namespace ApiPedido.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("PedidoID");
+
+                    b.HasIndex("ClienteID");
 
                     b.ToTable("Pedidios");
                 });
@@ -141,6 +177,15 @@ namespace ApiPedido.Migrations
                     b.Navigation("Productos");
                 });
 
+            modelBuilder.Entity("ApiPedido.Models.Pedido", b =>
+                {
+                    b.HasOne("ApiPedido.Models.Cliente", "Cliente")
+                        .WithMany("Pedidios")
+                        .HasForeignKey("ClienteID");
+
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("ApiPedido.Models.Producto", b =>
                 {
                     b.HasOne("ApiPedido.Models.Categoria", "Categoria")
@@ -155,6 +200,11 @@ namespace ApiPedido.Migrations
             modelBuilder.Entity("ApiPedido.Models.Categoria", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("ApiPedido.Models.Cliente", b =>
+                {
+                    b.Navigation("Pedidios");
                 });
 
             modelBuilder.Entity("ApiPedido.Models.Pedido", b =>

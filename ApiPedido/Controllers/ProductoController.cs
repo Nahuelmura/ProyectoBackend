@@ -19,7 +19,7 @@ namespace ApiPedidos.Controllers
         
         
    
-
+// get general
 [HttpGet]
 public async Task<IActionResult> ListadoProducto()
         {

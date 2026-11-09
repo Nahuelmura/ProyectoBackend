@@ -21,14 +21,23 @@ namespace ApiPedidos.Controllers
         [HttpGet]
         public async Task<IActionResult> ListadoCategoria()
         {
-            var categorias = await _context.Categorias.ToListAsync();
-
-            return Ok(categorias);
-        }
+           
 
 
+                var categorias = await _context.Categorias.ToListAsync();
 
-        [HttpPost]
+                var ejemplo = new
+                {
+                    total = categorias.Count,
+                    categorias = categorias
+                };
+
+                return Ok(ejemplo);
+            }
+
+
+
+            [HttpPost]
         public async Task<IActionResult> CrearCategoria([FromBody] Categoria categoria)
         {
             var nombreMayuscula = categoria.Nombre?.Trim().ToUpper();
