@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Clientes y Pedidos</title>
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Informe de Clientes y Pedidos</h2>
+            <button class="btn btn-primary" onclick="cargarInforme()">Cargar Informe</button>
+        </div>
+
+        <table class="table table-bordered table-hover bg-white shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Total Gastado</th>
+                </tr>
+            </thead>
+            <tbody id="contenidoInforme">
+                <!-- Aquí se inyectan los dos niveles -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="../js/informe.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/layout.js"></script>
+</body>
+
+</html>

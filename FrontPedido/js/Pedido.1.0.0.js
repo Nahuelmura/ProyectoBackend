@@ -1,6 +1,4 @@
-
 let detallesPedido = []; // donde guardamos los detalles del pedido
-
 
 function ObtenerPedido() {
   fetch("http://localhost:5049/api/Pedido")
@@ -23,7 +21,7 @@ function mostrarPedido(data) {
     tr.insertCell(0).innerHTML = element.nombreDelCliente;
     tr.insertCell(1).innerHTML = element.fechaFormateada;
     tr.insertCell(2).innerHTML = element.estadoPedido;
-   
+    tr.insertCell(3).innerHTML = element.total;
   });
 }
 
@@ -33,12 +31,14 @@ function obtenerProductos() {
     .then((respuesta) => respuesta.json())
 
     .then((data) => {
+      let productos = data.productos || data.Productos; // Agregamos esta variable porque lo traemos envuelto desde el get
       let productoSeleccionado = document.getElementById("producto");
 
       productoSeleccionado.innerHTML =
         '<option value="">[SELECCIONE...]</option>';
 
-      data.forEach((producto) => {
+      //el foreach ahora recorre productos
+      productos.forEach((producto) => {
         productoSeleccionado.innerHTML += `
                     <option 
                         value="${producto.productoID}"data-precio="${producto.precioVentaProducto}">
@@ -55,6 +55,33 @@ function obtenerProductos() {
     });
 }
 
+// funcion donde obtenemos los Clientes
+function obtenerClientes() {
+  fetch(`http://localhost:5049/api/Cliente`)
+    .then((respuesta) => respuesta.json())
+
+    .then((data) => {
+      let productoSeleccionado = document.getElementById("cliente");
+
+      productoSeleccionado.innerHTML =
+        '<option value="">[SELECCIONE...]</option>';
+
+      data.forEach((cliente) => {
+        productoSeleccionado.innerHTML += `
+                    <option 
+                        value="${cliente.clienteID}">
+                        
+                        ${cliente.nombre}
+
+                    </option>
+                `;
+      });
+    })
+
+    .catch((error) => {
+      console.error("Error al obtener productos:", error);
+    });
+}
 
 function cargarPrecio() {
   let producto = document.getElementById("producto");
@@ -73,7 +100,6 @@ function cargarPrecio() {
   precioInput.value = precio;
 }
 
-
 function AgregarDetalle() {
   let producto = document.getElementById("producto");
   let cantidad = Number(document.getElementById("cantidad").value);
@@ -90,11 +116,8 @@ function AgregarDetalle() {
   MostrarDetalles();
 }
 
-
-
-
 function MostrarDetalles() {
-  let tbody = document.getElementById("tablaDetalles"); 
+  let tbody = document.getElementById("tablaDetalles");
   if (!tbody) return;
 
   tbody.innerHTML = "";
@@ -114,26 +137,21 @@ function MostrarDetalles() {
       </tr>
     `;
   });
-let inputTotal = document.getElementById("total");
-if (inputTotal) {
-  inputTotal.value = totalAcumulado.toFixed(2);
-}
-
+  let inputTotal = document.getElementById("total");
+  if (inputTotal) {
+    inputTotal.value = totalAcumulado.toFixed(2);
+  }
 }
 function EliminarDetalle(index) {
   detallesPedido.splice(index, 1);
   MostrarDetalles();
 }
 
-
-
 function CrearPedido() {
   let pedido = {
-    nombre: document.getElementById("nombre").value,
+    clienteID: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
     estado: Number(document.getElementById("estado").value),
-    total: Number(document.getElementById("total").value),
-
     detallePedidos: detallesPedido,
   };
 
@@ -155,8 +173,9 @@ function CrearPedido() {
       // iimpiamos el formulario
       detallesPedido = [];
       document.getElementById("fecha").value = "";
-      document.getElementById("total").value = "";
-       document.getElementById("nombre").value = "";
+      document.getElementById("cliente").value = "";
+      document.getElementById("cantidad").value = ""; 
+      document.getElementById("precioUnitario").value = "";
 
       MostrarDetalles();
       obtenerProductos();
@@ -168,8 +187,6 @@ function CrearPedido() {
     });
 }
 
-
-
-
 ObtenerPedido();
-obtenerProductos()
+obtenerProductos();
+obtenerClientes();

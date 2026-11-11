@@ -14,6 +14,8 @@
     const esProducto = paginaActual.startsWith("producto");
     const esCategoria = paginaActual.startsWith("categoria");
     const esPedido = paginaActual.startsWith("pedido");
+      const esInforme = paginaActual.startsWith("informe");
+            const esCliente = paginaActual.startsWith("cliente");
 
     // Plantilla del Navbar
     const navbarHTML = `
@@ -38,6 +40,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ${esPedido ? "active fw-semibold" : ""}" href="${baseViews}Pedido.html">Pedidos</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link ${esInforme ? "active fw-semibold" : ""}" href="${baseViews}Informe.html">Informe</a>
+                        </li>
+                           <li class="nav-item">
+                            <a class="nav-link ${esCliente ? "active fw-semibold" : ""}" href="${baseViews}Cliente.html">Cliente</a>
                         </li>
                     </ul>
                 </div>

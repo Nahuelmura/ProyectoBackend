@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../style/style.css">   
+</head>
+
+
+<body>
+
+    <input type="text" name="" id="nombre">
+    <input type="text" name="nombre" id="apellido">
+    <input type="text" name="nombre" id="telefono">
+    <input type="text" name="nombre" id="email">
+    <input type="text" name="nombre" id="direccion">
+
+    <button onclick="AgregarCliente()"> Crear Cliente</button>
+    
+
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Direccion</th>
+
+                </tr>
+            </thead>
+            <tbody id="tablaCliente">
+        
+            </tbody>
+        </table>
+        
+        </div>
+
+        <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/Cliente.js"></script>
+        <script src="../js/layout.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ function mostrarCategoria(data) {
   const tbody = document.getElementById("TablaCategoria");
   tbody.innerHTML = "";
 
-  data.forEach((element) => {
+  data.categorias.forEach((element) => {
     console.log("Elemento:", element);
     console.log("ID:", element.categoriaID);
     let tr = tbody.insertRow();
